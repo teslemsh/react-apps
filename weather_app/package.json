@@ -1,0 +1,25 @@
+{
+  "name": "weather_app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "convert-units": "^2.3.4",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-absolute-grid": "^3.0.1",
+    "react-dom": "^16.4.2",
+    "react-grid-layout": "^0.16.6",
+    "react-height": "^3.0.0",
+    "react-native-easy-grid": "^0.2.0",
+    "react-scripts": "1.1.5",
+    "react-sizeme": "^2.5.2",
+    "react-weathericons": "^1.0.4",
+    "weathericons": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

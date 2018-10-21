@@ -1,0 +1,8 @@
+@import  '../node_modules/react-grid-layout/css/styles.css';
+@import  '../node_modules/react-resizable/css/styles.css';
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+

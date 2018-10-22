@@ -5,10 +5,10 @@ import WeatherData from './WeatherData/index'
 import './styles.css'
 import transformWeather from '../../services/transformWeather'
 // import { SUN } from "../../constans/weathers";
-import weather_url from '../../constans/url_weather'
 import Grid from '@material-ui/core/Grid'
 import Draggable from 'react-draggable'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { getUrlWeatherByCity } from "../../services/getUrlWeatherByCity";
 
 const styles = theme => ({
 	root: {
@@ -17,10 +17,13 @@ const styles = theme => ({
 });
 
 class WeatherLocation extends Component {
-	constructor () {
-		super();
+	constructor (props) {
+		super(props)
+		const { city } = props
+		console.log(city)
+		
 		this.state = {
-			city: null,
+			city,
 			data: null
 		}
 	}
@@ -28,7 +31,9 @@ class WeatherLocation extends Component {
 		this.handleUpdateClick()
 	}
 	handleUpdateClick = () => {
-		fetch(weather_url)
+		const api_weather = getUrlWeatherByCity(this.state.city)
+		console.log(api_weather)
+		fetch(api_weather)
 			.then(response=> response.json())
 			.then(response => {
 				this.setState({
@@ -36,7 +41,6 @@ class WeatherLocation extends Component {
 				})
 			})
 			.catch(error => console.error(error))
-		console.log('actualizado')
 	};
 	render() {
 		const {city, data} = this.state;
@@ -64,6 +68,7 @@ WeatherLocation.protoTypes = {
 			weatherSate: PropTypes.string.isRequired,
 			humidity: PropTypes.number.isRequired,
 			wind: PropTypes.string.isRequired,
+			city: PropTypes.string.isRequired,
 		}
 	)
 };

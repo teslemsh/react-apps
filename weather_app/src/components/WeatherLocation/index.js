@@ -4,20 +4,15 @@ import Location from './Location'
 import WeatherData from './WeatherData/index'
 import './styles.css'
 import transformWeather from '../../services/transformWeather'
-import { SUN } from "../../constans/weathers";
+// import { SUN } from "../../constans/weathers";
 import weather_url from '../../constans/url_weather'
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid'
 import Draggable from 'react-draggable'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = theme => ({
 	root: {
 		flexGrow: 1,
-	},
-	paper: {
-		padding: theme.spacing.unit * 2,
-		textAlign: 'center',
-		color: theme.palette.text.primary,
 	},
 });
 
@@ -25,16 +20,12 @@ class WeatherLocation extends Component {
 	constructor () {
 		super();
 		this.state = {
-			city: 'Buenos Aires',
-			data: {
-				temperature: 5,
-				weatherState: SUN,
-				humidity: 10,
-				wind: '10/S'
-			},
-			height: 0
+			city: null,
+			data: null
 		}
-		
+	}
+	componentDidMount() {
+		this.handleUpdateClick()
 	}
 	handleUpdateClick = () => {
 		fetch(weather_url)
@@ -55,24 +46,11 @@ class WeatherLocation extends Component {
 					<Grid item>
 						<div className="weatherLocationCont">
 							<Location city={city}/>
-							<WeatherData data ={data}/>
-							<button onClick={this.handleUpdateClick}>Actualizar</button>
+							{ data ?
+									<WeatherData data ={data}/> :
+									<CircularProgress size={50}/>
+							}
 						</div>
-						<div className="weatherLocationCont">
-							<Location city={city}/>
-							<WeatherData data ={data}/>
-							<button onClick={this.handleUpdateClick}>Actualizar</button>
-						</div>
-					</Grid>
-				</Draggable>
-				<Draggable>
-					<Grid item xs>
-						<Paper className={styles.paper}>xs</Paper>
-					</Grid>
-				</Draggable>
-				<Draggable>
-					<Grid item xs>
-						<Paper className={styles.paper}>xs</Paper>
 					</Grid>
 				</Draggable>
 			</Grid>
